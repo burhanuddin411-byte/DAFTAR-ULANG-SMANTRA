@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daftar Ulang SPMB 2027/2028 – SMA Negeri 1 Terara</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--tx:#1b2430;--mu:#5d6b7c;--bd:#d9e0e8;--pr:#0f6b4f;--pr2:#e3f3ec;--dg:#b3261e;--c1:#0f6b4f;--c2:#2563eb;--c3:#d97706;--c4:#7c3aed;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121820;--card:#1b2430;--tx:#e8edf3;--mu:#9aa8b8;--bd:#2d3a4a;--pr:#4cc79a;--pr2:#183a2f;--dg:#ff8a80;--c1:#4cc79a;--c2:#6ea0ff;--c3:#f5b14a;--c4:#b794ff}}
+:root[data-theme="dark"]{--bg:#121820;--card:#1b2430;--tx:#e8edf3;--mu:#9aa8b8;--bd:#2d3a4a;--pr:#4cc79a;--pr2:#183a2f;--dg:#ff8a80;--c1:#4cc79a;--c2:#6ea0ff;--c3:#f5b14a;--c4:#b794ff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--pr);color:#fff;padding:14px 16px}header h1{margin:0;font-size:18px}header p{margin:2px 0 0;font-size:13px;opacity:.9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header{color:#0b1a14}}
+nav{display:flex;gap:4px;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--bd);overflow-x:auto}
+nav button{border:0;background:none;color:var(--mu);padding:8px 14px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+nav button.on{background:var(--pr2);color:var(--pr)}
+main{max-width:980px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:16px}
+h2{margin:0 0 12px;font-size:17px}h3{margin:16px 0 8px;font-size:15px;color:var(--pr)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.stat{border:1px solid var(--bd);border-radius:10px;padding:12px}.stat b{display:block;font-size:26px}.stat span{color:var(--mu);font-size:13px}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:3px}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.f{margin-bottom:10px}.req::after{content:" *";color:var(--dg)}
+.btn{background:var(--pr);color:#fff;border:0;border-radius:8px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0b1a14}}
+.btn.s{background:var(--pr2);color:var(--pr)}.btn.d{background:none;color:var(--dg);border:1px solid var(--dg)}.btn.sm{padding:5px 10px;font-size:13px}
+.bars .row{display:flex;align-items:center;gap:8px;margin:8px 0}.bars .lb{width:150px;font-size:13px}.bars .tr{flex:1;background:var(--bg);border-radius:6px;height:22px;overflow:hidden}.bars .fl{height:100%;border-radius:6px;transition:width .4s}.bars .n{width:36px;text-align:right;font-weight:700}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:1px solid var(--bd);padding:7px 8px;text-align:left;white-space:nowrap}th{color:var(--mu)}
+.msg{padding:10px 12px;border-radius:8px;background:var(--pr2);color:var(--pr);margin-bottom:12px}.msg.e{background:none;border:1px solid var(--dg);color:var(--dg)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.bar>*{width:auto;flex:1;min-width:140px}
+#pr{display:none}.kv th{width:38%;text-align:left}.bukti{max-width:14cm;margin:0 auto;border:1px solid #000;padding:14px}.kv{margin:12px 0}
+@media print{header,nav,main{display:none!important}#pr{display:block;color:#000;background:#fff;padding:0}#pr table{font-size:11px}#pr th,#pr td{border:1px solid #000;color:#000;white-space:normal}.kop{text-align:center;margin-bottom:10px}.ttd{margin-top:30px;float:right;text-align:center}}
+</style>
+</head>
+<body>
+<header><h1>Daftar Ulang Siswa Baru – SPMB</h1><p>SMA Negeri 1 Terara · Tahun Pelajaran 2027/2028</p></header>
+<nav id="nav"><button data-t="beranda" class="on">Beranda</button><button data-t="daftar">Daftar Ulang</button><button data-t="admin" id="tadmin">Admin</button></nav>
+<main>
+<section id="beranda"></section>
+<section id="daftar" hidden></section>
+<section id="admin" hidden></section>
+</main>
+<div id="pr"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+// ====== ISI DENGAN DATA PROJECT SUPABASE ANDA (Project Settings > API) ======
+const SUPABASE_URL="https://XXXX.supabase.co";
+const SUPABASE_KEY="ISI_ANON_PUBLIC_KEY";
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let isAdmin=false;
+const JALUR=["Afirmasi","Prestasi Akademik","Prestasi Non Akademik","Prestasi Tahfiz","Domisili"];
+const COL=["--c1","--c2","--c3","--c4","--pr"];
+const AGAMA=["Islam","Kristen","Katolik","Hindu","Buddha","Khonghucu","Kepercayaan"];
+const PEND=["Tidak sekolah","SD/sederajat","SMP/sederajat","SMA/sederajat","D1/D2/D3","S1/D4","S2","S3"];
+const KERJA=["Tidak bekerja","Petani","Buruh","Nelayan","Pedagang/Wiraswasta","PNS/TNI/Polri","Guru/Dosen","Karyawan Swasta","Pensiunan","Lainnya"];
+const GAJI=["Kurang dari Rp500.000","Rp500.000 – Rp999.999","Rp1.000.000 – Rp1.999.999","Rp2.000.000 – Rp4.999.999","Rp5.000.000 – Rp20.000.000","Lebih dari Rp20.000.000","Tidak berpenghasilan"];
+const TINGGAL=["Bersama orang tua","Wali","Kost","Asrama","Panti asuhan","Lainnya"];
+const TRANS=["Jalan kaki","Sepeda motor","Sepeda","Angkutan umum","Antar jemput sekolah","Mobil pribadi","Lainnya"];
+const ID=(k)=>document.getElementById(k);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let rows=[],editing=null,fj="",fq="";
+
+// ---- field definitions: [key,label,type,required,options]
+const SEC=[
+["Data Pendaftaran SPMB",[["no_peserta","Nomor Peserta SPMB","text",1],["jalur","Jalur Penerimaan","select",1,JALUR],["no_kip","No. KIP/PIP/KKS (khusus Afirmasi)","text"],["ket_prestasi","Keterangan prestasi (bidang/tingkat/juara) – jalur Prestasi","text"]]],
+["Identitas Peserta Didik",[["nama","Nama Lengkap (sesuai ijazah/KK)","text",1],["nisn","NISN (10 digit)","text",1],["nik","NIK (16 digit)","text",1],["no_kk","No. Kartu Keluarga","text",1],["jk","Jenis Kelamin","select",1,["Laki-laki","Perempuan"]],["tmp_lahir","Tempat Lahir","text",1],["tgl_lahir","Tanggal Lahir","date",1],["agama","Agama","select",1,AGAMA],["asal_sekolah","Sekolah Asal (SMP/MTs)","text",1],["no_ijazah","No. Seri Ijazah SMP/MTs (jika ada)","text"],["anak_ke","Anak ke-","number"],["jml_saudara","Jumlah Saudara Kandung","number"],["tinggi","Tinggi Badan (cm)","number"],["berat","Berat Badan (kg)","number"],["hp","No. HP/WhatsApp","tel",1],["email","Email","email"],["f_kip","Upload KIP/PKH (PDF, jika ada)","file"],["f_kk","Upload Kartu Keluarga (PDF)","file",1],["f_ijazah","Upload Ijazah/SKL (PDF)","file",1]]],
+["Alamat Tempat Tinggal",[["alamat","Alamat (Jalan/Dusun)","text",1],["rt","RT","text"],["rw","RW","text"],["desa","Desa/Kelurahan","text",1],["kec","Kecamatan","text",1],["kab","Kabupaten/Kota","text",1],["pos","Kode Pos","text"],["tinggal","Tempat Tinggal","select",1,TINGGAL],["transport","Moda Transportasi ke Sekolah","select",1,TRANS],["jarak","Jarak ke Sekolah (km)","number"]]],
+["Data Ayah Kandung",[["ayah_nama","Nama Ayah","text",1],["ayah_nik","NIK Ayah","text"],["ayah_lahir","Tahun Lahir Ayah","number"],["ayah_pend","Pendidikan Ayah","select",0,PEND],["ayah_kerja","Pekerjaan Ayah","select",0,KERJA],["ayah_gaji","Penghasilan Ayah","select",0,GAJI],["f_ktp_ayah","Upload Scan KTP Ayah (PDF)","file"]]],
+["Data Ibu Kandung",[["ibu_nama","Nama Ibu","text",1],["ibu_nik","NIK Ibu","text"],["ibu_lahir","Tahun Lahir Ibu","number"],["ibu_pend","Pendidikan Ibu","select",0,PEND],["ibu_kerja","Pekerjaan Ibu","select",0,KERJA],["ibu_gaji","Penghasilan Ibu","select",0,GAJI],["f_ktp_ibu","Upload Scan KTP Ibu (PDF)","file"]]],
+["Data Wali (jika ada)",[["wali_nama","Nama Wali","text"],["wali_kerja","Pekerjaan Wali","select",0,KERJA],["wali_gaji","Penghasilan Wali","select",0,GAJI]]]
+];
+function fld(f,v){const [k,l,t,r,o]=f;const x=v?.[k]??"";
+ if(t==="file")return `<div class="f"><label class="${r&&!x?"req":""}">${l}</label><input name="${k}" type="file" accept="application/pdf,.pdf" ${r&&!x?"required":""}>${x?`<small><a href="#" data-f="${esc(x)}">Lihat berkas terunggah</a> · pilih berkas baru untuk mengganti</small>`:`<small style="color:var(--mu)">PDF, maks. 5 MB</small>`}</div>`;
+ const inp=t==="select"?`<select name="${k}" ${r?"required":""}><option value="">– pilih –</option>${o.map(a=>`<option ${a===x?"selected":""}>${esc(a)}</option>`).join("")}</select>`:`<input name="${k}" type="${t}" value="${esc(x)}" ${r?"required":""} ${k==="nisn"?'inputmode="numeric" pattern="\\d{10}" maxlength="10"':""} ${k==="nik"||k==="no_kk"?'inputmode="numeric" pattern="\\d{16}" maxlength="16"':""}>`;
+ return `<div class="f"><label class="${r?"req":""}">${l}</label>${inp}</div>`}
+function renderForm(v){editing=v?.nisn||null;
+ ID("daftar").innerHTML=`<div class="card"><h2>${editing?"Ubah Data Siswa":"Formulir Daftar Ulang"}</h2><p style="color:var(--mu);margin-top:0">Isi sesuai dokumen resmi (KK, akta kelahiran, ijazah/SKL). Kolom bertanda <span style="color:var(--dg)">*</span> wajib diisi. Data digunakan untuk pengisian Dapodik.</p><div id="fm"></div><form id="fr">${SEC.map(([t,fs])=>`<h3>${t}</h3><div class="grid">${fs.map(f=>fld(f,v)).join("")}</div>`).join("")}<p><label><input type="checkbox" id="ok" style="width:auto" required> Saya menyatakan data di atas benar.</label></p><button class="btn" type="submit">${editing?"Simpan Perubahan":"Kirim Daftar Ulang"}</button> ${editing?'<button type="button" class="btn s" id="bt">Batal</button>':""}</form></div>`;
+ ID("fr").onsubmit=save;if(ID("bt"))ID("bt").onclick=()=>{renderForm();show("admin")};}
+async function save(e){e.preventDefault();const d={},fl={};for(const [k,v] of new FormData(e.target).entries()){if(v instanceof File)fl[k]=v;else d[k]=v}delete d.ok;
+ const m=ID("fm");const err=t=>{m.innerHTML=`<div class="msg e">${t}</div>`;scrollTo(0,0)};
+ if(!/^\d{10}$/.test(d.nisn))return err("NISN harus 10 digit angka.");
+ if(!/^\d{16}$/.test(d.nik)||!/^\d{16}$/.test(d.no_kk))return err("NIK dan No. KK harus 16 digit angka.");
+ if(editing&&editing!==d.nisn)return err("NISN tidak dapat diubah. Hapus data lalu input ulang jika NISN keliru.");
+ const old=editing?rows.find(r=>r.nisn===editing):null;d.waktu=old?.waktu||new Date().toISOString();
+ const btn=e.target.querySelector("button[type=submit]"),lbl=btn.textContent;const rs=()=>{btn.disabled=false;btn.textContent=lbl};btn.disabled=true;btn.textContent="Menyimpan\u2026";
+ try{
+  for(const [k,f] of Object.entries(fl)){if(!f.size){if(old?.[k])d[k]=old[k];continue}
+   if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){rs();return err("Berkas harus berformat PDF.")}
+   if(f.size>5*1024*1024){rs();return err("Ukuran berkas maksimal 5 MB.")}
+   const p=`${d.nisn}/${k}-${Date.now()}.pdf`;
+   const u=await sb.storage.from("berkas").upload(p,f,{contentType:"application/pdf"});if(u.error)throw u.error;d[k]=p}
+  const row={nisn:d.nisn,nama:d.nama,jalur:d.jalur,data:d};
+  const r=editing?await sb.from("siswa").update(row).eq("nisn",editing):await sb.from("siswa").insert(row);
+  if(r.error){rs();return err(r.error.code==="23505"?"NISN ini sudah terdaftar ulang.":"Gagal menyimpan: "+esc(r.error.message))}
+  const rm=Object.keys(fl).filter(k=>fl[k].size&&old?.[k]).map(k=>old[k]);if(rm.length)sb.storage.from("berkas").remove(rm);
+ }catch(x){rs();return err("Gagal menyimpan: "+esc(x.message||x))}
+ loadStat();if(isAdmin)loadRows();
+ if(editing){renderForm();show("admin")}else{renderForm();ID("fm").innerHTML=`<div class="msg">Daftar ulang atas nama <b>${esc(d.nama)}</b> berhasil disimpan. Terima kasih.<br><br><button class="btn" id="cbk">Cetak Bukti Daftar Ulang</button></div>`;ID("cbk").onclick=()=>bukti(d);scrollTo(0,0)}}
+
+// ---- Beranda
+let stat={jalur:{},jk:{}};
+async function loadStat(){const {data}=await sb.rpc("rekap");if(data)stat=data;renderHome()}
+function renderHome(){const c=JALUR.map(j=>+(stat.jalur?.[j]||0)),t=c.reduce((a,b)=>a+b,0),mx=Math.max(1,...c);
+ ID("beranda").innerHTML=`<div class="card"><h2>Siswa yang Telah Daftar Ulang</h2><div class="grid"><div class="stat"><b>${t}</b><span>Total daftar ulang</span></div>${JALUR.map((j,i)=>`<div class="stat"><b style="color:var(${COL[i]})">${c[i]}</b><span>${j}</span></div>`).join("")}</div></div>
+ <div class="card"><h2>Grafik per Jalur</h2><div class="bars">${JALUR.map((j,i)=>`<div class="row"><div class="lb">${j}</div><div class="tr"><div class="fl" style="width:${c[i]/mx*100}%;background:var(${COL[i]})"></div></div><div class="n">${c[i]}</div></div>`).join("")}</div>${t?"":'<p style="color:var(--mu)">Belum ada data daftar ulang.</p>'}</div>
+ <div class="card"><h2>Jenis Kelamin</h2>${["Laki-laki","Perempuan"].map(g=>`<span class="stat" style="display:inline-block;margin-right:8px"><b>${+(stat.jk?.[g]||0)}</b><span>${g}</span></span>`).join("")}</div>`}
+
+// ---- Admin
+function filtered(){const q=fq.toLowerCase();return rows.filter(r=>(!fj||r.jalur===fj)&&(!q||(r.nama+r.nisn+r.nik).toLowerCase().includes(q))).sort((a,b)=>a.nama.localeCompare(b.nama))}
+function renderAdmin(){
+ if(!isAdmin){ID("admin").innerHTML=`<div class="card" style="max-width:380px"><h2>Masuk Admin</h2><div id="lm"></div><div class="f"><label>Email</label><input id="le" type="email" autocomplete="username"></div><div class="f"><label>Kata sandi</label><input id="lp" type="password" autocomplete="current-password"></div><button class="btn" id="lb">Masuk</button></div>`;
+  const go=async()=>{if(SUPABASE_KEY.startsWith("ISI_")){ID("lm").innerHTML='<div class="msg e">Supabase belum dikonfigurasi (SUPABASE_URL dan SUPABASE_KEY di index.html).</div>';return}
+   const bt=ID("lb");bt.disabled=true;bt.textContent="Memeriksa\u2026";
+   const r=await sb.auth.signInWithPassword({email:ID("le").value.trim(),password:ID("lp").value});
+   if(r.error){bt.disabled=false;bt.textContent="Masuk";ID("lm").innerHTML='<div class="msg e">Email atau kata sandi salah.</div>'}};
+  ID("lb").onclick=go;[ID("le"),ID("lp")].forEach(i=>i.onkeydown=e=>{if(e.key==="Enter")go()});return}
+ const l=filtered();
+ ID("admin").innerHTML=`<div class="card"><h2>Data Siswa Daftar Ulang</h2><div class="bar"><select id="fj"><option value="">Semua jalur</option>${JALUR.map(j=>`<option ${j===fj?"selected":""}>${j}</option>`).join("")}</select><input id="fq" placeholder="Cari nama / NISN / NIK" value="${esc(fq)}"><button class="btn" id="pb" style="flex:0 0 auto">Cetak Laporan</button><button class="btn s" id="cb" style="flex:0 0 auto">Unduh CSV</button><button class="btn d" id="lo" style="flex:0 0 auto">Keluar</button></div>
+ <div class="tw"><table><tr><th>No</th><th>Nama</th><th>NISN</th><th>JK</th><th>Jalur</th><th>Asal Sekolah</th><th>Berkas</th><th>Aksi</th></tr>${l.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.nama)}</td><td>${esc(r.nisn)}</td><td>${r.jk==="Laki-laki"?"L":"P"}</td><td>${esc(r.jalur)}</td><td>${esc(r.asal_sekolah)}</td><td>${lnk(r)}</td><td><button class="btn s sm" data-b="${r.nisn}">Bukti</button> <button class="btn s sm" data-e="${r.nisn}">Edit</button> <button class="btn d sm" data-d="${r.nisn}">Hapus</button></td></tr>`).join("")||'<tr><td colspan="8">Tidak ada data.</td></tr>'}</table></div></div>`;
+ ID("fj").onchange=e=>{fj=e.target.value;renderAdmin()};
+ ID("fq").oninput=e=>{fq=e.target.value;const p=e.target.selectionStart;renderAdmin();const n=ID("fq");n.focus();n.setSelectionRange(p,p)};
+ ID("pb").onclick=cetak;ID("cb").onclick=csv;ID("lo").onclick=()=>sb.auth.signOut();
+ document.querySelectorAll("[data-b]").forEach(b=>b.onclick=()=>bukti(rows.find(r=>r.nisn===b.dataset.b)));
+ document.querySelectorAll("[data-e]").forEach(b=>b.onclick=()=>{renderForm(rows.find(r=>r.nisn===b.dataset.e));show("daftar")});
+ document.querySelectorAll("[data-d]").forEach(b=>b.onclick=async()=>{const r=rows.find(x=>x.nisn===b.dataset.d);if(confirm(`Hapus data ${r.nama} (${r.nisn})? Tindakan ini tidak dapat dibatalkan.`)){const dl=await sb.from("siswa").delete().eq("nisn",r.nisn);if(dl.error)alert("Gagal menghapus: "+dl.error.message);else{const ps=BK.map(b=>r[b[0]]).filter(Boolean);if(ps.length)sb.storage.from("berkas").remove(ps);loadRows();loadStat()}}})}
+function cetak(){const l=filtered();const tgl=new Date().toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric"});
+ ID("pr").innerHTML=`<div class="kop"><b>LAPORAN DAFTAR ULANG PESERTA DIDIK BARU</b><br><b>SMA NEGERI 1 TERARA</b><br>Tahun Pelajaran 2027/2028<br>Jalur: ${fj||"Semua Jalur"} · Jumlah: ${l.length} siswa</div><table><tr><th>No</th><th>Nama</th><th>NISN</th><th>L/P</th><th>Tempat, Tgl Lahir</th><th>Jalur</th><th>Asal Sekolah</th><th>Nama Ayah/Ibu</th><th>No. HP</th></tr>${l.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.nama)}</td><td>${esc(r.nisn)}</td><td>${r.jk==="Laki-laki"?"L":"P"}</td><td>${esc(r.tmp_lahir)}, ${esc(r.tgl_lahir)}</td><td>${esc(r.jalur)}</td><td>${esc(r.asal_sekolah)}</td><td>${esc(r.ayah_nama)} / ${esc(r.ibu_nama)}</td><td>${esc(r.hp)}</td></tr>`).join("")}</table><div class="ttd">Terara, ${tgl}<br>Panitia SPMB<br><br><br><br>(................................)</div>`;
+ setTimeout(()=>print(),100)}
+const BK=[["f_kk","KK"],["f_ijazah","Ijazah/SKL"],["f_kip","KIP/PKH"],["f_ktp_ayah","KTP Ayah"],["f_ktp_ibu","KTP Ibu"]];
+function lnk(r){return BK.filter(([k])=>r[k]).map(([k,n])=>`<a href="#" data-f="${esc(r[k])}">${n}</a>`).join(" · ")||"–"}
+function bukti(r){if(!r)return;const fd=(s,o)=>s?new Date(s.length<11?s+"T00:00":s).toLocaleDateString("id-ID",o||{day:"numeric",month:"long",year:"numeric"}):"";
+ const rw=(a,b)=>`<tr><th>${a}</th><td>${esc(b)||"-"}</td></tr>`;
+ ID("pr").innerHTML=`<div class="bukti"><div class="kop"><b>BUKTI DAFTAR ULANG PESERTA DIDIK BARU</b><br><b>SMA NEGERI 1 TERARA</b><br>Tahun Pelajaran 2027/2028</div><table class="kv">${rw("Nama Lengkap",r.nama)}${rw("NISN",r.nisn)}${rw("No. Peserta SPMB",r.no_peserta)}${rw("Jalur",r.jalur)}${rw("Tempat, Tanggal Lahir",r.tmp_lahir+", "+fd(r.tgl_lahir))}${rw("Jenis Kelamin",r.jk)}${rw("Asal Sekolah",r.asal_sekolah)}${rw("Orang Tua (Ayah / Ibu)",(r.ayah_nama||"-")+" / "+(r.ibu_nama||"-"))}${rw("No. HP",r.hp)}${rw("Berkas Terunggah",BK.filter(([k])=>r[k]).map(b=>b[1]).join(", "))}${rw("Tanggal Daftar Ulang",fd(r.waktu))}</table><p style="font-size:12px">Status: <b>BERHASIL DAFTAR ULANG</b>. Simpan bukti ini dan bawa saat kegiatan di sekolah.</p><div style="overflow:hidden"><div class="ttd">Terara, ${fd(r.waktu)}<br>Panitia SPMB<br><br><br><br>(................................)</div></div></div>`;
+ setTimeout(()=>print(),100)}
+async function csv(){const ks=SEC.flatMap(s=>s[1].filter(f=>f[2]!=="file").map(f=>f[0])),l=filtered();
+ const t="\ufeff"+[ks.join(","),...l.map(r=>ks.map(k=>`"${String(r[k]??"").replace(/"/g,'""')}"`).join(","))].join("\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/csv"}));a.download="daftar-ulang-"+(fj||"semua").replace(/\s/g,"-")+".csv";a.click()}
+
+// ---- shell
+function show(t){document.querySelectorAll("main>section").forEach(s=>s.hidden=s.id!==t);document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));if(t==="admin")renderAdmin();if(t==="beranda")renderHome()}
+ID("nav").onclick=e=>{const t=e.target.dataset?.t;if(!t)return;if(t==="daftar"&&editing)renderForm();show(t)};
+async function loadRows(){const {data,error}=await sb.from("siswa").select("*").order("nama");if(error){console.error(error);return}
+ rows=data.map(x=>({...x.data,nisn:x.nisn,waktu:x.data?.waktu||x.waktu}));if(!ID("admin").hidden)renderAdmin()}
+document.addEventListener("click",async e=>{const p=e.target.dataset?.f;if(!p)return;e.preventDefault();
+ const {data}=await sb.storage.from("berkas").createSignedUrl(p,120);if(data)open(data.signedUrl,"_blank","noopener");else alert("Berkas tidak dapat dibuka (khusus admin).")});
+sb.auth.onAuthStateChange((_,ses)=>{isAdmin=!!ses;setTimeout(()=>{if(isAdmin)loadRows();else{rows=[];if(!ID("admin").hidden)renderAdmin()}},0)});
+renderForm();renderHome();loadStat();
+</script>
+</body>
+</html>
